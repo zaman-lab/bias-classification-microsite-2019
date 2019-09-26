@@ -1,0 +1,46 @@
+TwitterUser,TwitterHandle,ImageURL,UserAffiliation,CategoryOrig,CategoryCustom,Average of pred_prob_0,StdDev of pred_prob_0
+ABC News,ABC,https://pbs.twimg.com/profile_images/1082358814819536896/19QbYCgF_400x400.jpg,ABC News,Cable News,TV / Radio News Network,0.638387968,0.409595904
+CBS News,CBSNews,https://pbs.twimg.com/profile_images/645966750941626368/d0Q4voGK_400x400.jpg,CBS News,Cable News,TV / Radio News Network,0.633033959,0.408667925
+CNN,CNN,https://pbs.twimg.com/profile_images/508960761826131968/LnvhR8ED_400x400.png,CNN,Cable News,TV / Radio News Network,0.652139182,0.40505832
+Fox News,FoxNews,https://pbs.twimg.com/profile_images/918480715158716419/4X8oCbge_400x400.jpg,Fox News,Cable News,TV / Radio News Network,0.57209972,0.418222037
+MSNBC,MSNBC,https://pbs.twimg.com/profile_images/988382060443250689/DijesdNB_400x400.jpg,MSNBC,Cable News,TV / Radio News Network,0.765190194,0.356283257
+NBC News,NBCNews,https://pbs.twimg.com/profile_images/1108426393287868423/CyLn5GVQ_400x400.png,NBC News,Cable News,TV / Radio News Network,0.650503312,0.400148737
+PBS NewsHour,NewsHour,https://pbs.twimg.com/profile_images/875456540450443265/W5yKx8um_400x400.jpg,PBS NewsHour,Cable News,TV / Radio News Network,0.674533229,0.38949021
+USA Today,USATODAY,https://pbs.twimg.com/profile_images/924991591642796032/v90LrlR__400x400.jpg,USA Today,Cable News,Newspaper,0.622932266,0.40982614
+Anderson Cooper 360,AC360,https://pbs.twimg.com/profile_images/878354521285693440/-rKCcjvP_400x400.jpg,CNN,Cable News Host,News Personality,0.702543599,0.384398273
+Sean Hannity,SeanHannity,https://pbs.twimg.com/profile_images/378800000709183776/6273b31aa1836ac86426478aaa82a597_400x400.jpeg,Fox News,Cable News Host,News Personality,0.493252511,0.389063113
+Tucker Carlson,TuckerCarlson,https://pbs.twimg.com/profile_images/796823622450982912/XYcUsJUI_400x400.jpg,Fox News,Cable News Host,News Personality,0.436600598,0.413020273
+Laura Ingraham,IngrahamAngle,https://pbs.twimg.com/profile_images/1146349820912660480/CjdAuR5i_400x400.jpg,Fox News,Cable News Host,News Personality,0.385370163,0.421144792
+Lawrence O'Donnell,TheLastWord,https://pbs.twimg.com/profile_images/964659978039566337/YEEq7DVS_400x400.jpg,MSNBC,Cable News Host,News Personality,0.857377488,0.28998357
+Rachel Maddow,Maddow,https://pbs.twimg.com/profile_images/59437078/icon-200x200_400x400.jpg,MSNBC,Cable News Host,News Personality,0.836335689,0.294347562
+Chris Hayes,ChrisLHayes,https://pbs.twimg.com/profile_images/1157427683170668544/j0dSHvkO_400x400.jpg,TODO,Cable News Host,News Personality,0.762208527,0.348339592
+Chuck Todd,ChuckTodd,https://pbs.twimg.com/profile_images/1047542880934551554/gQM2XGJM_400x400.jpg,NBC News,Journalist,News Personality,0.72666084,0.370000659
+Maggie Haberman,maggienyt,https://pbs.twimg.com/profile_images/1164036563162079233/71FCNtWG_400x400.jpg,CNN,Journalist,News Personality,0.801521356,0.335625846
+Andrea Mitchell,mitchellreports,https://pbs.twimg.com/profile_images/2182502571/Andrea_Mitchell_Twitter_profile_headshot_400x400.jpg,NBC News,Journalist,News Personality,0.760503895,0.341800091
+Don Lemon,donlemon,https://pbs.twimg.com/profile_images/855418003164454912/6d3qGP5R_400x400.jpg,CNN,Journalist,News Personality,0.636605617,0.393259455
+Christiane Amanpour,camanpour,https://pbs.twimg.com/profile_images/1082309523820429312/3qDsoBYu_400x400.jpg,CNN,Journalist,News Personality,0.610173373,0.404030248
+Diane Sawyer,DianeSawyer,https://pbs.twimg.com/profile_images/2928675140/fae506b06618221ff491bc84040cd4d3_400x400.jpeg,ABC News,Journalist,News Personality,0.562743909,0.389147896
+Jim Acosta,Acosta,https://pbs.twimg.com/profile_images/1108747240527548417/NGPxjhpw_400x400.jpg,CNN,Journalist,News Personality,0.817988378,0.327852246
+Ezra Klein,ezraklein,https://pbs.twimg.com/profile_images/430528937022595072/ivuRfUNj_400x400.jpeg,Vox,Journalist,News Personality,0.716229245,0.371198681
+New York Times,NYTimes,https://pbs.twimg.com/profile_images/1098244578472280064/gjkVMelR_400x400.png,New York Times,Newspapers,Newspaper,0.650159677,0.403665216
+The Associated Press,AP,https://pbs.twimg.com/profile_images/461964160838803457/8z9FImcv_400x400.png,The Associated Press,Newspapers,Newspaper,0.657295052,0.410160492
+The Economist,TheEconomist,https://pbs.twimg.com/profile_images/879361767914262528/HdRauDM-_400x400.jpg,The Economist,Newspapers,Newspaper,0.620849871,0.406692261
+Wall Street Journal,WSJ,https://pbs.twimg.com/profile_images/971415515754266624/zCX0q9d5_400x400.jpg,Wall Street Journal,Newspapers,Newspaper,0.646493487,0.405595286
+Washington Post,WashingtonPost,https://pbs.twimg.com/profile_images/1060271522319925257/fJKwJ0r2_400x400.jpg,Washington Post,Newspapers,Newspaper,0.707758167,0.385567496
+Breitbart News,BreitbartNews,https://pbs.twimg.com/profile_images/949270171755077632/dw3M-58z_400x400.jpg,Breitbart News,#N/A,Digital News Outlet,0.425558786,0.242680134
+Nancy Pelosi,SpeakerPelosi,https://pbs.twimg.com/profile_images/1114294290375688193/P9mcJNGb_400x400.png,Democratic Party,#N/A,Politician,0.764945653,0.359149886
+Alexandria Ocasio-Cortez,AOC,https://pbs.twimg.com/profile_images/923274881197895680/AbHcStkl_400x400.jpg,Democratic Party,#N/A,Politician,0.692572139,0.386136657
+Joe Biden,JoeBiden,https://pbs.twimg.com/profile_images/1175087314458034177/TgjtVgfG_400x400.png,Democratic Party,#N/A,Politician,0.682480765,0.37921715
+HuffPost,TODO,TODO,HuffPost,#N/A,Digital News Outlet,0.683374152,0.393186099
+Mother Jones,MotherJones,https://pbs.twimg.com/profile_images/1054453881890004992/xmAefhLr_400x400.jpg,Mother Jones,#N/A,Digital News Outlet,0.752017776,0.353735487
+Taylor Swift,TODO,TODO,N/A,#N/A,Celebrity,0.57582307,0.370828663
+Kanye West,TODO,TODO,N/A,#N/A,Celebrity,0.505012622,0.347285808
+NPR,NPR,https://pbs.twimg.com/profile_images/1166363726980767745/KbbgAZA6_400x400.jpg,NPR,#N/A,TV / Radio News Network,0.666305902,0.399075836
+Paul Ryan,SpeakerRyan,https://pbs.twimg.com/profile_images/949025012455038976/RHY5aj1F_400x400.jpg,Republican Party,#N/A,Politician,0.584096035,0.417727874
+The Daily Show,TheDailyShow,https://pbs.twimg.com/profile_images/1074700910486536192/Io_RXyEz_400x400.jpg,TODO,#N/A,News Personality,0.62536262,0.380851815
+George Stephanopoulos,GStephanopoulos,https://pbs.twimg.com/profile_images/67746253/abc_george_081014_blog_400x400.jpg,ABC News,#N/A,News Personality,0.809385429,0.330808086
+Anderson Cooper,andersoncooper,https://pbs.twimg.com/profile_images/826174315435524097/WnzUsRX5_400x400.jpg,CNN,#N/A,News Personality,0.655710052,0.384887965
+David Gergen,David_Gergen,https://pbs.twimg.com/profile_images/450281785637609472/Giuawnh5_400x400.jpeg,CNN,#N/A,News Personality,0.64093404,0.408325266
+Brian Stelter,brianstelter,https://pbs.twimg.com/profile_images/378800000011961281/f053ce187d9fe1393f4684ca92c89d74_400x400.jpeg,CNN,#N/A,News Personality,0.733454158,0.369213121
+Will Hurd,HurdOnTheHill,https://pbs.twimg.com/profile_images/1025781170422697984/EVv0gsW3_400x400.jpg,Republican Party,#N/A,Politician,0.60337566,0.401887489
+Vox,voxdotcom,https://pbs.twimg.com/profile_images/807306191395241984/s8xmWAvU_400x400.jpg,Vox,#N/A,Digital News Outlet,0.693254469,0.389429124
