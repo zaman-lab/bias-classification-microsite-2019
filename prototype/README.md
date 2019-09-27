@@ -1,6 +1,6 @@
 ## Summary
 
-This PR contains a copy of the preliminary results data, as well as prototype visualizations of this dataset and the means to reproduce them.  See below for notes about the dataset, a summary of my observations, and a list of questions for further analysis. This content is the precursor for material I would include in a blog post about this data.
+This PR contains a copy of the preliminary results data, as well as prototype data visualizations and the means to reproduce them.  See below for notes about the dataset, a summary of my observations, and a list of questions for further analysis. This content is the precursor for material I would include in a blog post about this data.
 
 ## Dataset Notes
 
@@ -28,24 +28,14 @@ The TV network accounts themselves seem to have a less extreme average predicted
 
 ## Outstanding Questions
 
-  1. What exactly is the definition of "bias" as it relates to this data? Does it simply mean the tweet content is likely to be anti-Trump? My initial thought was the word "bias" has connotations that are potentially too strong, but then I looked up the [definition](https://www.merriam-webster.com/dictionary/bias) of the word, and it says "an inclination of temperament or outlook" and "deviation of the expected value of a statistical estimate from the quantity it estimates", so I guess the word may be appropriate.
+  1. ~~What exactly is the definition of "bias" as it relates to this data? Does it simply mean the tweet content is likely to be anti-Trump? My initial thought was the word "bias" has connotations that are potentially too strong, but then I looked up the [definition](https://www.merriam-webster.com/dictionary/bias) of the word, and it says "an inclination of temperament or outlook" and "deviation of the expected value of a statistical estimate from the quantity it estimates", so I guess the word may be appropriate. EDIT: the existing blog post draft answers this well, defining the scores as the "probability that a tweet sounds like an anti-Trump tweet".~~
 
   2. What is the middle between bias and lack of bias? Mathematically, if 0 represents lack of bias and 1 represents bias, the middle value would be 0.5, but "Fox News" is at 0.57, so does it make sense to say they have a positive anti-Trump bias? Likely no. So the middle value must be higher. Based on the data it looks like it could be around 0.62%. This requires further investigation.
     a. In order to help us understand this phenomenon better, I wonder: what were the predicted anti-Obama results for these same accounts during the Obama presidency? It is possible these anti-Obama values could help us explain where the middle is.
 
-  3. Do low predicted anti-Trump bias values indicate the inverse (a high pro-Trump bias)? Or should we not be reading that way? Obama numbers might help answer this.
+  3. ~~Do low predicted anti-Trump bias values indicate the inverse (a high pro-Trump bias)? Or should we not be reading that way? Obama numbers might help answer this. EDIT: it would seem they do, as explained in the existing blog post draft, that these scores are trained on both pro-Trump and anti-Trump tweets.~~
 
-  4. How to interpret the standard deviations, which seem large?
-
-Average of pred_prob_0 | StdDev of pred_prob_0
--- | --
-0.425558786 | 0.242680134
-0.857377488 | 0.28998357
-0.836335689 | 0.294347562
-... | ...
-0.584096035 | 0.417727874
-0.57209972 | 0.418222037
-0.385370163 | 0.421144792
+  4. ~~How to interpret the standard deviations, which seem large in relationship to the possible range of values between 0 and 1. EDIT: the existing blog post draft explains them well, saying lower standard deviations indicate tweets more consistently sound similar to that of either anti-Trump or pro-Trump tweets.~~
 
   5. What are some example tweets that have been classified at high / low bias? I'd want to include a few in the blog post.
 
