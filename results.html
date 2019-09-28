@@ -46,11 +46,26 @@
 
     <!--script src="https://code.jquery.com/jquery-1.12.0.min.js"></script-->
     <!--script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script-->
-    <!--script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script-->
+    <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
     <!--script src='https://d3js.org/colorbrewer.v1.min.js'></script-->
     <script type="text/javascript">
 
+      console.log("---------------")
       console.log("RESULTS PAGE")
+      console.log("---------------")
+
+      // preliminary data (for mockup purposes):
+      const requestUrl = "https://raw.githubusercontent.com/zaman-lab/bias-classification-microsite-2019/3995ed1ddd2d41f0fa836922128280b2c32fa299/prototype/data/classifications-prelim.csv"
+      console.log("REQUEST URL", requestUrl)
+
+      var zz // for debugging purposes
+      d3.csv(requestUrl, function(err, response){
+        zz = response // caches the response, for debugging in the console later
+        console.log("RESPONSE", response)
+        console.log(Object.keys(response[0])) //> ["TwitterUser", "TwitterHandle", "ImageURL", "UserAffiliation", "CategoryOrig", "CategoryCustom", "Average of pred_prob_0", "StdDev of pred_prob_0"]
+
+      });
+
 
 
 
