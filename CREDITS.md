@@ -23,3 +23,4 @@ This document contains links to resources and materials which were helpful in th
   + [Individual Bar Colors](https://plot.ly/javascript/bar-charts/#customizing-individual-bar-colors)
   + [Horizontal Bar](https://plot.ly/javascript/horizontal-bar-charts/)
   + [Layout Margins](https://plot.ly/javascript/reference/#layout-margin)
+  + [Fixed Bar Widths](https://plot.ly/javascript/reference/#bar-width)

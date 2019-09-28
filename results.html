@@ -52,67 +52,76 @@
     <!--script src="https://code.jquery.com/jquery-1.12.0.min.js"></script-->
     <!--script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script-->
     <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-    <!--script src='https://d3js.org/colorbrewer.v1.min.js'></script-->
+    <!--script src="https://d3js.org/colorbrewer.v1.min.js"></script-->
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <script type="text/javascript">
-
       console.log("---------------")
       console.log("RESULTS PAGE")
       console.log("---------------")
 
+      const vizContainerId = "viz-container";
+      var vizContainer = document.getElementById(vizContainerId);
+
       var categorySelector = document.getElementById("category-selector");
       categorySelector.addEventListener("change", updateChart, false);
 
+      //var colorScale = d3.scale.linear();
+      //var palette = colorbrewer.Blues[9];
+      //colorScale.range([ palette[2], palette[5], palette[8] ]);
+
+      //function calibrateColorScale(values){
+      //    var quantiles = [ d3.min(values), d3.mean(values), d3.max(values) ]
+      //    console.log("CALIBRATE COLORS AROUND", quantiles)
+      //    colorScale.domain(quantiles);
+      //};
+
       function updateChart() {
-        var selectedCategory = categorySelector.value;
-        console.log("SELECTED CATEGORY:", selectedCategory)
-
-        //
-        // REQUEST AND PROCESS RESULTS DATA
-        //
-
-        // preliminary data (for mockup purposes):
         const requestUrl = "https://raw.githubusercontent.com/zaman-lab/bias-classification-microsite-2019/3995ed1ddd2d41f0fa836922128280b2c32fa299/prototype/data/classifications-prelim.csv"
         console.log("REQUEST URL:", requestUrl)
-        const biasScoreColumnName = "Average of pred_prob_0"; // based on the data contained at that address
-        const categoryColumnName = "CategoryCustom"; // based on the data contained at that address
+        const biasScoreColumnName = "Average of pred_prob_0";
+        const categoryColumnName = "CategoryCustom";
 
-        var accounts; // allows caching of the response data, for debugging in the console later
-
+        var accounts;
         d3.csv(requestUrl, function(err, response){
           accounts = response
           console.log("RESPONSE:", response)
-          //console.log(Object.keys(response[0])) //> ["TwitterUser", "TwitterHandle", "ImageURL", "UserAffiliation", "CategoryOrig", "CategoryCustom", "Average of pred_prob_0", "StdDev of pred_prob_0"]
 
-          //
-          // FILTER AND SORT THE DATA
-          //
+          var selectedCategory = categorySelector.value;
+          console.log("SELECTED CATEGORY:", selectedCategory)
 
-          // filter accounts matching the selected category, if necessary:
           if (selectedCategory.toUpperCase() != "ALL") {
-              accounts = accounts.filter(function(obj){
-                return obj[categoryColumnName].toUpperCase() == selectedCategory.toUpperCase()
+            accounts = accounts.filter(function(obj){
+              return obj[categoryColumnName].toUpperCase() == selectedCategory.toUpperCase()
             });
-          }
-
-          // sort accounts by bias score ascending (so the bars will display in descending order):
+          };
           accounts = accounts.sort(function(a, b){
-              return d3.ascending(a[biasScoreColumnName], b[biasScoreColumnName])
+            return d3.ascending(a[biasScoreColumnName], b[biasScoreColumnName])
+          });
+          console.log("SELECTED ACCOUNTS", accounts)
+
+          var accountNames = accounts.map(function(obj){
+            return obj["TwitterUser"] + " (@" + obj["TwitterHandle"] + ")";
           });
 
-          //
-          // CONFIGURE THE CHART
-          //
+          var biasScores = accounts.map(function(obj){
+            return obj[biasScoreColumnName];
+          });
 
-          var accountNames = accounts.map(function(obj){ return obj["TwitterUser"] + " (@" + obj["TwitterHandle"] + ")" });
-          var biasScores = accounts.map(function(obj){ return obj[biasScoreColumnName] });
+          //var biasScoreColors = accounts.map(function(obj){
+          //  return "rgba(204,204,204,1)"; // "rgba(204,204,204,1)", "rgba(222,45,38,0.8)", etc.
+          //  //return "rgba(204,204,204,1)" // "rgba(204,204,204,1)", "rgba(222,45,38,0.8)", etc.
+          //});
+          //console.log("COLORS", colors)
+          //calibrateColorScale(biasScores)
 
           var data = [
             {
+              type: "bar",
+              orientation: "h",
               y: accountNames,
               x: biasScores,
-              type: "bar",
-              orientation: "h"
+              //width: 0.5,
+              //marker:{ color: biasScoreColors },
             }
           ];
 
@@ -127,11 +136,18 @@
             }
           };
 
-          //
-          // INITIALIZE / DISPLAY THE CHART
-          //
+          //var heightsMap = {
+          //  "All": "70em"
+          //}
+          //var barHeightEm = 1.6; // for every 45 accounts, 70em looks good, so for each account, 70/45, or 1.55em should be OK
+          //console.log("BAR HEIGHT", barHeightEm)
+          //var vizHeightEm = (barHeightEm * accounts.length) + 2 ; // plus some overhead space for chart title, etc.
+          //console.log("NUM BARS", accounts.length)
+          //console.log("VIZ HEIGHT", vizHeightEm)
+          //vizContainer.style.height = `${vizHeightEm}em`; // resizes div height to fit all datapoints
+          console.log("VIZ HEIGHT:", vizContainer.style.height)
 
-          Plotly.newPlot("viz-container", data, layout, {responsive: true});
+          Plotly.newPlot(vizContainerId, data, layout, {responsive: true});
 
         });
 
