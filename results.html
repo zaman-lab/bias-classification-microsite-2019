@@ -29,7 +29,7 @@
 
       <div class="row" style="margin-top:0; margin-bottom:1em;">
         <div class="col-sm-12">
-          <div id="viz-container" style="height:30em; border:1px solid #000;"></div>
+          <div id="viz-container"></div>
         </div>
       </div>
 
@@ -65,26 +65,21 @@
         console.log("RESPONSE", response)
         console.log(Object.keys(response[0])) //> ["TwitterUser", "TwitterHandle", "ImageURL", "UserAffiliation", "CategoryOrig", "CategoryCustom", "Average of pred_prob_0", "StdDev of pred_prob_0"]
 
-
-
         var data = [
           {
-            x: ["Account A", "Account B", "Account C"],
-            y: [0.4, 0.6, 0.8],
-            type: "bar"
+            y: ["Account A", "Account B", "Account C"],
+            x: [0.4, 0.6, 0.8],
+            type: "bar",
+            orientation: "h"
           }
         ];
 
-        Plotly.newPlot("viz-container", data);
+        var layout = {
+          title: "Anti-Trump Bias by Twitter Account",
+          font: {size: 18}
+        };
 
-
-
-
-
-
-
-
-
+        Plotly.newPlot("viz-container", data, layout, {responsive: true});
 
       });
 
