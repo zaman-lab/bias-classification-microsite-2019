@@ -24,3 +24,7 @@ This document contains links to resources and materials which were helpful in th
   + [Horizontal Bar](https://plot.ly/javascript/horizontal-bar-charts/)
   + [Layout Margins](https://plot.ly/javascript/reference/#layout-margin)
   + [Fixed Bar Widths](https://plot.ly/javascript/reference/#bar-width)
+
+## Colorbrewer.js
+
+  + [Every Colorbrewer Scale](https://bl.ocks.org/emeeks/8cdec64ed6daf955830fa723252a4ab3)

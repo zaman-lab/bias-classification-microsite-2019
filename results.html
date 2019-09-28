@@ -41,7 +41,6 @@
       <footer class="row">
         <div class="col-sm-12" style="margin-bottom:1em;">
           <p>
-            <a href="/">Site</a> |
             <a href="https://github.com/zaman-lab/bias-classification-microsite-2019">Site Source</a> |
             <a href="https://github.com/zaman-lab/bias-classification-2019">Data Source</a>
           </p>
@@ -52,28 +51,22 @@
     <!--script src="https://code.jquery.com/jquery-1.12.0.min.js"></script-->
     <!--script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script-->
     <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-    <!--script src="https://d3js.org/colorbrewer.v1.min.js"></script-->
+    <script src="https://d3js.org/colorbrewer.v1.min.js"></script>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <script type="text/javascript">
       console.log("---------------")
       console.log("RESULTS PAGE")
       console.log("---------------")
 
+      var colorScale = d3.scale.linear();
+      var palette = colorbrewer.RdBu[11]; // a red-blue diverging color scale
+      colorScale.range([ palette[1], palette[6], palette[10] ]);
+
       const vizContainerId = "viz-container";
       var vizContainer = document.getElementById(vizContainerId);
 
       var categorySelector = document.getElementById("category-selector");
       categorySelector.addEventListener("change", updateChart, false);
-
-      //var colorScale = d3.scale.linear();
-      //var palette = colorbrewer.Blues[9];
-      //colorScale.range([ palette[2], palette[5], palette[8] ]);
-
-      //function calibrateColorScale(values){
-      //    var quantiles = [ d3.min(values), d3.mean(values), d3.max(values) ]
-      //    console.log("CALIBRATE COLORS AROUND", quantiles)
-      //    colorScale.domain(quantiles);
-      //};
 
       function updateChart() {
         const requestUrl = "https://raw.githubusercontent.com/zaman-lab/bias-classification-microsite-2019/3995ed1ddd2d41f0fa836922128280b2c32fa299/prototype/data/classifications-prelim.csv"
@@ -83,8 +76,14 @@
 
         var accounts;
         d3.csv(requestUrl, function(err, response){
-          accounts = response
           console.log("RESPONSE:", response)
+
+          accounts = response
+
+          var biasScoresAll = accounts.map(function(obj){ return obj[biasScoreColumnName]; });
+          // assign bias score values to color scale domain BEFORE filtering the data,
+          // ... to maintain consistent color scale across all selections
+          colorScale.domain([ d3.min(biasScoresAll), d3.mean(biasScoresAll), d3.max(biasScoresAll) ]);
 
           var selectedCategory = categorySelector.value;
           console.log("SELECTED CATEGORY:", selectedCategory)
@@ -94,25 +93,18 @@
               return obj[categoryColumnName].toUpperCase() == selectedCategory.toUpperCase()
             });
           };
+
+          console.log("SELECTED ACCOUNTS", accounts)
+
           accounts = accounts.sort(function(a, b){
             return d3.ascending(a[biasScoreColumnName], b[biasScoreColumnName])
           });
-          console.log("SELECTED ACCOUNTS", accounts)
 
-          var accountNames = accounts.map(function(obj){
-            return obj["TwitterUser"] + " (@" + obj["TwitterHandle"] + ")";
-          });
+          var accountNames = accounts.map(function(obj){ return obj["TwitterUser"] + " (@" + obj["TwitterHandle"] + ")"; });
 
-          var biasScores = accounts.map(function(obj){
-            return obj[biasScoreColumnName];
-          });
+          var biasScores = accounts.map(function(obj){ return obj[biasScoreColumnName]; });
 
-          //var biasScoreColors = accounts.map(function(obj){
-          //  return "rgba(204,204,204,1)"; // "rgba(204,204,204,1)", "rgba(222,45,38,0.8)", etc.
-          //  //return "rgba(204,204,204,1)" // "rgba(204,204,204,1)", "rgba(222,45,38,0.8)", etc.
-          //});
-          //console.log("COLORS", colors)
-          //calibrateColorScale(biasScores)
+          var biasScoreColors = accounts.map(function(obj){ return colorScale(obj[biasScoreColumnName]); });
 
           var data = [
             {
@@ -120,8 +112,8 @@
               orientation: "h",
               y: accountNames,
               x: biasScores,
+              marker:{ color: biasScoreColors },
               //width: 0.5,
-              //marker:{ color: biasScoreColors },
             }
           ];
 
@@ -145,7 +137,7 @@
           //console.log("NUM BARS", accounts.length)
           //console.log("VIZ HEIGHT", vizHeightEm)
           //vizContainer.style.height = `${vizHeightEm}em`; // resizes div height to fit all datapoints
-          console.log("VIZ HEIGHT:", vizContainer.style.height)
+          //console.log("VIZ HEIGHT:", vizContainer.style.height)
 
           Plotly.newPlot(vizContainerId, data, layout, {responsive: true});
 
