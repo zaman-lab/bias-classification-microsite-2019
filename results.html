@@ -29,7 +29,7 @@
 
       <div class="row" style="margin-top:0; margin-bottom:1em;">
         <div class="col-sm-12">
-          <div id="viz-container"></div>
+          <div id="viz-container" style="height:70em;"></div>
         </div>
       </div>
 
@@ -59,6 +59,8 @@
       const requestUrl = "https://raw.githubusercontent.com/zaman-lab/bias-classification-microsite-2019/3995ed1ddd2d41f0fa836922128280b2c32fa299/prototype/data/classifications-prelim.csv"
       console.log("REQUEST URL", requestUrl)
 
+      const biasScoreColumnName = "Average of pred_prob_0"; // based on the data contained at that address
+
       var accounts // for debugging purposes
       d3.csv(requestUrl, function(err, response){
         accounts = response // caches the response, for debugging in the console later
@@ -67,18 +69,13 @@
 
         // TODO: filter the accounts based on the selected category
 
-        // sort by bias score ascending (so the bars will display in descending order)
+        var accounts = accounts.sort(function(a, b){
+            return d3.ascending(a[biasScoreColumnName], b[biasScoreColumnName])
+        }); // sorts accounts by bias score ascending (so the bars will display in descending order)
 
-        var sortedAccounts = accounts.sort(function(a, b){
-            return d3.ascending(a["Average of pred_prob_0"], b["Average of pred_prob_0"])
-        });
+        var accountNames = accounts.map(function(obj){ return obj["TwitterUser"] + " (@" + obj["TwitterHandle"] + ")" });
 
-        console.log(sortedAccounts[0])
-
-        // TODO: separate account names and scores
-
-        var accountNames = ["Account A", "Account B", "Account C"]
-        var biasScores = [0.4, 0.6, 0.8] // TODO: populate based on response data
+        var biasScores = accounts.map(function(obj){ return obj[biasScoreColumnName] });
 
         var data = [
           {
@@ -96,7 +93,7 @@
           font: {size: 18},
           margin: {
             pad: 20, // padding between labels and bars
-            l: 140 // move twitter account labels into view (the first few letters were getting cut off)
+            l: 450 // move twitter account labels into view (the first few letters were getting cut off). 400 would be fine except for the long name of George Stef. needs 450
           }
         };
 
