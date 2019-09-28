@@ -74,9 +74,14 @@
           }
         ];
 
+        var chartTitle = "Anti-Trump Bias by Twitter Account (All)"; // TODO: update based on selected category
         var layout = {
-          title: "Anti-Trump Bias by Twitter Account",
-          font: {size: 18}
+          title: chartTitle,
+          font: {size: 18},
+          margin: {
+            pad: 20, // padding between labels and bars
+            l: 140 // move twitter account labels into view (the first few letters were getting cut off)
+          }
         };
 
         Plotly.newPlot("viz-container", data, layout, {responsive: true});

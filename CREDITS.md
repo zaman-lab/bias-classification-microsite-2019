@@ -15,3 +15,4 @@ Material which was helpful in the process of creating this microsite:
   + [Responsive Layout](https://plot.ly/javascript/responsive-fluid-layout/)
   + [Individual Bar Colors](https://plot.ly/javascript/bar-charts/#customizing-individual-bar-colors)
   + [Horizontal Bar](https://plot.ly/javascript/horizontal-bar-charts/)
+  + [Layout Margins](https://plot.ly/javascript/reference/#layout-margin)
