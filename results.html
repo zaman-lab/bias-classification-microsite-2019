@@ -59,22 +59,32 @@
       const requestUrl = "https://raw.githubusercontent.com/zaman-lab/bias-classification-microsite-2019/3995ed1ddd2d41f0fa836922128280b2c32fa299/prototype/data/classifications-prelim.csv"
       console.log("REQUEST URL", requestUrl)
 
-      var zz // for debugging purposes
+      var accounts // for debugging purposes
       d3.csv(requestUrl, function(err, response){
-        zz = response // caches the response, for debugging in the console later
-        console.log("RESPONSE", response)
-        console.log(Object.keys(response[0])) //> ["TwitterUser", "TwitterHandle", "ImageURL", "UserAffiliation", "CategoryOrig", "CategoryCustom", "Average of pred_prob_0", "StdDev of pred_prob_0"]
+        accounts = response // caches the response, for debugging in the console later
+        //console.log("RESPONSE", response)
+        //console.log(Object.keys(response[0])) //> ["TwitterUser", "TwitterHandle", "ImageURL", "UserAffiliation", "CategoryOrig", "CategoryCustom", "Average of pred_prob_0", "StdDev of pred_prob_0"]
+
+        // TODO: filter the accounts based on the selected category
+
+        // TODO: sort by bias score ascending (so the bars will display in descending order)
+
+        // TODO: separate account names and scores
+
+        var accountNames = ["Account A", "Account B", "Account C"]
+        var biasScores = [0.4, 0.6, 0.8] // TODO: populate based on response data
 
         var data = [
           {
-            y: ["Account A", "Account B", "Account C"],
-            x: [0.4, 0.6, 0.8],
+            y: accountNames,
+            x: biasScores,
             type: "bar",
             orientation: "h"
           }
         ];
 
         var chartTitle = "Anti-Trump Bias by Twitter Account (All)"; // TODO: update based on selected category
+
         var layout = {
           title: chartTitle,
           font: {size: 18},
