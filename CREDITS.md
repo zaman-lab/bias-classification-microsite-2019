@@ -5,6 +5,7 @@ Material which was helpful in the process of creating this microsite:
   + [Python 3 Simple Server](https://stackoverflow.com/a/17351115/670433)
   + [Previous Dataviz Project](https://github.com/data-creative/us-state-legislature-compositions/blob/master/index.html)
   + [Object keys in JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys)
+  + [JavaScript DOM Fundamentals](https://github.com/prof-rossetti/js-dom-fundamentals)
 
 ## Plotly.js
 

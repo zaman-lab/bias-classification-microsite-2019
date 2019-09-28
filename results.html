@@ -67,7 +67,13 @@
 
         // TODO: filter the accounts based on the selected category
 
-        // TODO: sort by bias score ascending (so the bars will display in descending order)
+        // sort by bias score ascending (so the bars will display in descending order)
+
+        var sortedAccounts = accounts.sort(function(a, b){
+            return d3.ascending(a["Average of pred_prob_0"], b["Average of pred_prob_0"])
+        });
+
+        console.log(sortedAccounts[0])
 
         // TODO: separate account names and scores
 
