@@ -19,9 +19,13 @@
           <div class="form-group">
             <label for="category-selector">Select a Category:</label>
             <select id="category-selector" class="form-control" title="Select a category">
-              <option value="all" selected=true>All</option>
-              <option value="newspaper">Newspaper</option>
-              <option value="tv">TV News</option>
+              <option value="All" >All</option>
+              <option value="Newspaper" selected=true>Newspaper</option>
+              <option value="TV / Radio News Network">TV / Radio News Network</option>
+              <option value="Digital News Outlet">Digital News Outlet</option>
+              <option value="News Personality">News Personality</option>
+              <option value="Politician">Politician</option>
+              <option value="Celebrity">Celebrity</option>
             </select>
           </div>
         </div>
@@ -55,26 +59,51 @@
       console.log("RESULTS PAGE")
       console.log("---------------")
 
+      //
+      // REQUEST AND PROCESS RESULTS DATA
+      //
+
       // preliminary data (for mockup purposes):
       const requestUrl = "https://raw.githubusercontent.com/zaman-lab/bias-classification-microsite-2019/3995ed1ddd2d41f0fa836922128280b2c32fa299/prototype/data/classifications-prelim.csv"
-      console.log("REQUEST URL", requestUrl)
-
+      console.log("REQUEST URL:", requestUrl)
       const biasScoreColumnName = "Average of pred_prob_0"; // based on the data contained at that address
+      const categoryColumnName = "CategoryCustom"; // based on the data contained at that address
 
-      var accounts // for debugging purposes
+      var accounts; // allows caching of the response data, for debugging in the console later
+
       d3.csv(requestUrl, function(err, response){
-        accounts = response // caches the response, for debugging in the console later
-        //console.log("RESPONSE", response)
+        accounts = response
+        console.log("RESPONSE:", response)
         //console.log(Object.keys(response[0])) //> ["TwitterUser", "TwitterHandle", "ImageURL", "UserAffiliation", "CategoryOrig", "CategoryCustom", "Average of pred_prob_0", "StdDev of pred_prob_0"]
 
-        // TODO: filter the accounts based on the selected category
+        //
+        // DETECT CATEGORY SELECTION
+        //
 
-        var accounts = accounts.sort(function(a, b){
+        var selectedCategory = "all" // TODO: get from HTML select element
+        console.log("SELECTED CATEGORY:", selectedCategory)
+
+        //
+        // FILTER AND SORT THE DATA
+        //
+
+        // filter accounts matching the selected category, if necessary:
+        if (selectedCategory.toUpperCase() != "ALL") {
+            accounts = accounts.filter(function(obj){
+              return obj[categoryColumnName].toUpperCase() == selectedCategory.toUpperCase()
+          });
+        }
+
+        // sort accounts by bias score ascending (so the bars will display in descending order):
+        accounts = accounts.sort(function(a, b){
             return d3.ascending(a[biasScoreColumnName], b[biasScoreColumnName])
-        }); // sorts accounts by bias score ascending (so the bars will display in descending order)
+        });
+
+        //
+        // CONFIGURE THE CHART
+        //
 
         var accountNames = accounts.map(function(obj){ return obj["TwitterUser"] + " (@" + obj["TwitterHandle"] + ")" });
-
         var biasScores = accounts.map(function(obj){ return obj[biasScoreColumnName] });
 
         var data = [
@@ -86,7 +115,7 @@
           }
         ];
 
-        var chartTitle = "Anti-Trump Bias by Twitter Account (All)"; // TODO: update based on selected category
+        var chartTitle = `Anti-Trump Bias by Twitter Account (${selectedCategory})`; // TODO titlecase the category
 
         var layout = {
           title: chartTitle,
@@ -96,6 +125,10 @@
             l: 450 // move twitter account labels into view (the first few letters were getting cut off). 400 would be fine except for the long name of George Stef. needs 450
           }
         };
+
+        //
+        // INITIALIZE / DISPLAY THE CHART
+        //
 
         Plotly.newPlot("viz-container", data, layout, {responsive: true});
 
