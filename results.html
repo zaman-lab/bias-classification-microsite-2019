@@ -59,9 +59,8 @@
       console.log("---------------")
 
       var colorScale = d3.scale.linear();
-      var palette = colorbrewer.RdBu[11];
-      //colorScale.range([ palette[1], palette[6], palette[10] ]);
-      colorScale.range([ palette[1], palette[10] ]);
+      var palette = colorbrewer.RdBu[9];
+      colorScale.range([ palette[0], palette[4], palette[8] ]);
 
       const vizContainerId = "viz-container";
       var vizContainer = document.getElementById(vizContainerId);
@@ -81,11 +80,9 @@
 
           accounts = response
 
+          // set color scale domain BEFORE filtering, so color scales are the same across different selections
           var biasScoresAll = accounts.map(function(obj){ return obj[biasScoreColumnName]; });
-          // assign bias score values to color scale domain BEFORE filtering the data,
-          // ... to maintain consistent color scale across all selections
-          //colorScale.domain([ d3.min(biasScoresAll), d3.mean(biasScoresAll), d3.max(biasScoresAll) ]);
-          colorScale.domain([ d3.min(biasScoresAll), d3.max(biasScoresAll) ]);
+          colorScale.domain([ d3.min(biasScoresAll), d3.mean(biasScoresAll), d3.max(biasScoresAll) ]);
 
           var selectedCategory = categorySelector.value;
           console.log("SELECTED CATEGORY:", selectedCategory)
