@@ -29,7 +29,7 @@
 
       <div class="row" style="margin-top:0; margin-bottom:1em;">
         <div class="col-sm-12">
-          <div id="viz-container" style="height:40em; border:1px solid #000;"></div>
+          <div id="viz-container" style="height:30em; border:1px solid #000;"></div>
         </div>
       </div>
 
@@ -48,6 +48,7 @@
     <!--script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script-->
     <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
     <!--script src='https://d3js.org/colorbrewer.v1.min.js'></script-->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <script type="text/javascript">
 
       console.log("---------------")
@@ -64,11 +65,28 @@
         console.log("RESPONSE", response)
         console.log(Object.keys(response[0])) //> ["TwitterUser", "TwitterHandle", "ImageURL", "UserAffiliation", "CategoryOrig", "CategoryCustom", "Average of pred_prob_0", "StdDev of pred_prob_0"]
 
+
+
+        var data = [
+          {
+            x: ["Account A", "Account B", "Account C"],
+            y: [0.4, 0.6, 0.8],
+            type: "bar"
+          }
+        ];
+
+        Plotly.newPlot("viz-container", data);
+
+
+
+
+
+
+
+
+
+
       });
-
-
-
-
 
     </script>
   </body>
