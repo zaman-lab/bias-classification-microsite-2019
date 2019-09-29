@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Results Page | Measuring Anti-Trump Bias on Twitter | A research project by Tauhid Zaman</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  </head>
+  <body>
+    <div class="container">
+      <div class="row" style="margin-top:1em;">
+        <div class="col-sm-12">
+          <a href="/"><h1>Measuring Anti-Trump Bias on Twitter</h1></a>
+          <p class="lead">A research project by Tauhid Zaman</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+          <h2>Results</h2>
+          <p>
+            The chart below depicts the anti-Trump polarity scores of all the Twitter accounts we analyzed.
+            These polarity scores represent the relative degree to which
+            the account's tweets sound like typical pro-Trump or anti-Trump rhetoric.
+            Higher scores (approaching 1, colored blue below) represent stronger anti-Trump rhetoric,
+            while lower scores (approaching 0, colored red below) represent stronger pro-Trump rhetoric.
+          </p>
+        </div>
+      </div>
+
+      <!--div class="row">
+        <div class="col-sm-5">
+          <div class="form-group">
+            <label for="category-selector">Select a Category:</label>
+            <select id="category-selector" class="form-control" title="Select a category">
+              <option value="All" selected=true>All</option>
+              <option value="Newspaper">Newspaper</option>
+              <option value="TV / Radio News Network">TV / Radio News Network</option>
+              <option value="Digital News Outlet">Digital News Outlet</option>
+              <option value="News Personality">News Personality</option>
+              <option value="Politician">Politician</option>
+              <option value="Celebrity">Celebrity</option>
+            </select>
+          </div>
+        </div>
+      </div-->
+
+      <div class="row" style="margin-top:0; margin-bottom:1em;">
+        <div class="col-sm-12">
+          <div id="viz-container" style="height:70em;"></div>
+        </div>
+      </div>
+
+      <hr>
+      <footer class="row">
+        <div class="col-sm-12" style="margin-bottom:1em;">
+          <p>
+            <a href="https://github.com/zaman-lab/bias-classification-microsite-2019">Site Source</a> |
+            <a href="https://github.com/zaman-lab/bias-classification-2019">Data Source</a>
+          </p>
+        </div>
+      </footer>
+    </div>
+
+    <!--script src="https://code.jquery.com/jquery-1.12.0.min.js"></script-->
+    <!--script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script-->
+    <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script src="https://d3js.org/colorbrewer.v1.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script type="text/javascript">
+      console.log("---------------")
+      console.log("RESULTS PAGE")
+      console.log("---------------")
+
+      var colorScale = d3.scale.linear();
+      var palette = colorbrewer.RdBu[5];
+      colorScale.range([ palette[0], palette[2], palette[4] ]);
+
+      const vizContainerId = "viz-container";
+      var vizContainer = document.getElementById(vizContainerId);
+
+      //var categorySelector = document.getElementById("category-selector");
+      //categorySelector.addEventListener("change", updateChart, false);
+
+      function updateChart() {
+        const requestUrl = "https://raw.githubusercontent.com/zaman-lab/bias-classification-microsite-2019/3995ed1ddd2d41f0fa836922128280b2c32fa299/prototype/data/classifications-prelim.csv"
+        console.log("REQUEST URL:", requestUrl)
+        const biasScoreColumnName = "Average of pred_prob_0";
+        const categoryColumnName = "CategoryCustom";
+
+        var accounts;
+        d3.csv(requestUrl, function(err, response){
+          console.log("RESPONSE:", response)
+
+          accounts = response
+
+          // set color scale domain BEFORE filtering, so color scales are the same across different selections
+          var biasScoresAll = accounts.map(function(obj){ return obj[biasScoreColumnName]; });
+          colorScale.domain([ d3.min(biasScoresAll), d3.mean(biasScoresAll), d3.max(biasScoresAll) ]);
+
+          //var selectedCategory = categorySelector.value;
+          //console.log("SELECTED CATEGORY:", selectedCategory)
+          //if (selectedCategory.toUpperCase() != "ALL") {
+          //  accounts = accounts.filter(function(obj){
+          //    return obj[categoryColumnName].toUpperCase() == selectedCategory.toUpperCase()
+          //  });
+          //};
+
+          console.log("SELECTED ACCOUNTS", accounts)
+
+          accounts = accounts.sort(function(a, b){
+            return d3.ascending(a[biasScoreColumnName], b[biasScoreColumnName])
+          });
+
+          var accountNames = accounts.map(function(obj){ return obj["TwitterUser"] + " (@" + obj["TwitterHandle"] + ")"; });
+
+          var biasScores = accounts.map(function(obj){ return obj[biasScoreColumnName]; });
+
+          var biasScoreColors = accounts.map(function(obj){ return colorScale(obj[biasScoreColumnName]); });
+
+          var data = [
+            {
+              name: "Anti-Trump Bias Score",
+              type: "bar",
+              orientation: "h",
+              y: accountNames,
+              x: biasScores,
+              marker: { color: biasScoreColors },
+              text: accountNames
+              //width: 0.5,
+            }
+          ];
+
+          //var chartTitle = `Anti-Trump Bias by Twitter Account (${selectedCategory})`; // TODO titlecase the category
+          var chartTitle = "Anti-Trump Bias by Twitter Account";
+
+          var layout = {
+            title: chartTitle,
+            font: {size: 18},
+            margin: {
+              pad: 20, // padding between labels and bars
+              l: 450 // move twitter account labels into view (the first few letters were getting cut off). 400 would be fine except for the long name of George Stef. needs 450
+            },
+            //showlegend: true,
+          };
+
+          //var heightsMap = {
+          //  "All": "70em"
+          //}
+          //var barHeightEm = 1.6; // for every 45 accounts, 70em looks good, so for each account, 70/45, or 1.55em should be OK
+          //console.log("BAR HEIGHT", barHeightEm)
+          //var vizHeightEm = (barHeightEm * accounts.length) + 2 ; // plus some overhead space for chart title, etc.
+          //console.log("NUM BARS", accounts.length)
+          //console.log("VIZ HEIGHT", vizHeightEm)
+          //vizContainer.style.height = `${vizHeightEm}em`; // resizes div height to fit all datapoints
+          //console.log("VIZ HEIGHT:", vizContainer.style.height)
+
+          Plotly.newPlot(vizContainerId, data, layout, {responsive: true});
+
+        });
+
+      };
+
+      updateChart() // default / initial invocation
+
+    </script>
+  </body>
+</html>
