@@ -32,3 +32,5 @@ This document contains links to resources and materials which were helpful in th
 ## Twitter Bootstrap
 
   + [Card Components](https://getbootstrap.com/docs/4.3/components/card/)
+  + [Center-align Buttons](https://stackoverflow.com/questions/41664991/bootstrap-4-how-do-i-center-align-a-button)
+  + [Cards as Radio Buttons](https://stackoverflow.com/questions/53867704/use-cards-as-radio-buttons-for-bootstrap-4/53867705)
