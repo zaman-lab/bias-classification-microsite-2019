@@ -12,8 +12,6 @@ The Homepage provides more information about the project and how to interpret th
 
 ### Game Page
 
-> NOTE: the game has not yet been implemented
-
 The Game Page asks the visitor to guess which of two Twitter accounts has a higher calculated anti-Trump bias score.
 
 After submitting their guess, the visitor is iteratively presented with another discrete pair of users to rank until there are no more discrete pairs remaining.
