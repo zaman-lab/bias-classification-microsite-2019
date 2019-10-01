@@ -20,8 +20,43 @@
           <h2>Bias Guessing Game</h2>
           <p>
             So, which of the Twitter accounts below do you think displays more "anti-Trump bias"
-            (i.e. the likelihood their tweets look similar to anti-Trump tweets).
+            (i.e. the likelihood their tweets look similar to anti-Trump tweets)?
           </p>
+
+          <!--div class="row">
+            <div class="col-sm">
+              First Account
+            </div>
+
+            <div class="col-sm">
+              Second Account
+            </div>
+          </div-->
+
+          <div class="row">
+            <div class="col-sm">
+              <div class="card" style="width: 18rem;">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm">
+                <div class="card" style="width: 18rem;">
+                  <img src="..." class="card-img-top" alt="...">
+                  <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                  </div>
+                </div>
+            </div>
+          </div>
+
         </div>
       </div>
 
@@ -51,11 +86,18 @@
       console.log("GUESSING GAME!")
       console.log("---------------")
 
+      var gameContainer = document.getElementById("game-container");
 
-
-
-
-
+      //function selectAccounts(n=2) {
+      //  const requestUrl = "https://raw.githubusercontent.com/zaman-lab/bias-classification-microsite-2019/3995ed1ddd2d41f0fa836922128280b2c32fa299/prototype/data/classifications-prelim.csv"
+      //  console.log("REQUEST URL:", requestUrl)
+      //
+      //  var accounts;
+      //  d3.csv(requestUrl, function(err, response){
+      //    console.log("RESPONSE:", response)
+      //    accounts = response
+      //  });
+      //});
 
     </script>
   </body>

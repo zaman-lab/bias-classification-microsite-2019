@@ -28,3 +28,7 @@ This document contains links to resources and materials which were helpful in th
 ## Colorbrewer.js
 
   + [Every Colorbrewer Scale](https://bl.ocks.org/emeeks/8cdec64ed6daf955830fa723252a4ab3)
+
+## Twitter Bootstrap
+
+  + [Card Components](https://getbootstrap.com/docs/4.3/components/card/)
